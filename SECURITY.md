@@ -1,6 +1,6 @@
 # Security
 
-Report security problems privately. Do not open a public issue or discussion for them.
+Report security problems privately. Do not open a public issue or pull request for them.
 
 ## How to report
 

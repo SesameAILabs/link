@@ -76,8 +76,11 @@ jobs:
             5. If the issue is a security vulnerability, don't discuss details. Comment asking the
                reporter to use private reporting at
                https://github.com/SesameAILabs/link/security/advisories/new and add `security`.
-            6. If it's a feature request, add `idea` and suggest the Ideas discussions.
+            6. If it's a feature request, add `idea`. If it asks for a large change, such as a new
+               workflow, integration, or permission model, suggest writing an RFC as
+               https://github.com/SesameAILabs/link/blob/main/rfcs/README.md describes.
+            7. If it's a question, add `question`. Don't answer it: a maintainer will.
 
-            Post at most one comment, combining what steps 2 to 6 need. If none applies, don't
+            Post at most one comment, combining what steps 2 to 7 need. If none applies, don't
             comment. Write plainly and briefly, without greetings or sign-offs. Never promise a
             fix or a date. Never ask for raw logs, tokens, or session content.

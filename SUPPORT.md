@@ -16,8 +16,9 @@ your symptom in [Troubleshooting](https://link.sesame.com/docs/reference/trouble
 | You have | Go to |
 | --- | --- |
 | Something broken | [Open an issue](https://github.com/SesameAILabs/link/issues/new/choose) after searching [existing ones](https://github.com/SesameAILabs/link/issues?q=is%3Aissue) |
-| A question about how something works | [Q&A discussions](https://github.com/SesameAILabs/link/discussions/categories/q-a) |
-| An idea or feature request | [Ideas discussions](https://github.com/SesameAILabs/link/discussions/categories/ideas) |
+| A question about how something works | [Ask a question](https://github.com/SesameAILabs/link/issues/new?template=question.yml) |
+| A small improvement | [Request a feature](https://github.com/SesameAILabs/link/issues/new?template=feature_request.yml) |
+| A larger change that needs a design | [Write an RFC](rfcs/README.md) |
 | A mistake in the documentation | [Report a docs problem](https://github.com/SesameAILabs/link/issues/new?template=docs_problem.yml) |
 | A security problem | Report it privately, as [SECURITY.md](SECURITY.md) describes |
 

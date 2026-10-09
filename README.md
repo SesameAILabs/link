@@ -74,6 +74,8 @@ All commands are in the [command reference](https://link.sesame.com/docs/referen
 3. Search [existing issues](https://github.com/SesameAILabs/link/issues?q=is%3Aissue), then
    [open one](https://github.com/SesameAILabs/link/issues/new/choose).
 
-Ask questions and suggest ideas in [Discussions](https://github.com/SesameAILabs/link/discussions).
+Ask questions and suggest small improvements with the
+[issue forms](https://github.com/SesameAILabs/link/issues/new/choose). Propose larger changes with
+an [RFC](rfcs/README.md).
 Report security problems privately, as [SECURITY.md](SECURITY.md) describes, and never in a public
 issue.

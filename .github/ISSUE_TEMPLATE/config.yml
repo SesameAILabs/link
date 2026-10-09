@@ -1,14 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Ask a question
-    url: https://github.com/SesameAILabs/link/discussions/categories/q-a
-    about: How something works, or whether something is possible.
-  - name: Suggest an idea
-    url: https://github.com/SesameAILabs/link/discussions/categories/ideas
-    about: Feature requests go to Discussions, where others can vote on them.
   - name: Report a security problem
     url: https://github.com/SesameAILabs/link/security/advisories/new
     about: Report privately. Never in a public issue.
+  - name: Propose a larger change
+    url: https://github.com/SesameAILabs/link/blob/main/rfcs/README.md
+    about: Changes that need a design, such as a new workflow or integration, go through an RFC pull request.
   - name: Troubleshooting
     url: https://link.sesame.com/docs/reference/troubleshooting/
     about: Fixes for the most common problems.

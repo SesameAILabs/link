@@ -1,5 +1,12 @@
-labels: ["idea"]
+name: Feature request
+description: A small improvement or something Sesame Link should do.
+labels: ["idea", "needs-triage"]
+assignees: ["darkmirage"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        For a larger change that needs a design, such as a new workflow, integration, or permission model, write an [RFC](https://github.com/SesameAILabs/link/blob/main/rfcs/README.md) instead.
   - type: textarea
     id: problem
     attributes:

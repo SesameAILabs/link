@@ -1,0 +1,31 @@
+name: stale
+
+# Closes issues that waited 30 days for information the reporter never gave. Only `needs-info`
+# issues are touched; everything else stays open until a maintainer acts.
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@4391f3da665fdf50b6810c1a66712fb9ba21aa93 # v11.0.0
+        with:
+          only-labels: needs-info
+          days-before-issue-stale: 23
+          days-before-issue-close: 7
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+          stale-issue-label: stale
+          stale-issue-message: >-
+            This issue is waiting for the information asked for above. It will close in 7 days
+            without a reply. Reply any time to keep it open.
+          close-issue-message: >-
+            Closing because the information asked for didn't arrive. Comment with it and we'll
+            reopen.
+          close-issue-reason: not_planned

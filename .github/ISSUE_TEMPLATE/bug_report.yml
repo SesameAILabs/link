@@ -1,0 +1,95 @@
+name: Bug report
+description: Something in Sesame Link doesn't work as it should.
+labels: ["bug", "needs-triage"]
+assignees: ["darkmirage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before you file: run `sesame-link status` and `sesame-link doctor`, check [Troubleshooting](https://link.sesame.com/docs/reference/troubleshooting/), and search [existing issues](https://github.com/SesameAILabs/link/issues?q=is%3Aissue).
+
+        **Security problems go through [private reporting](https://github.com/SesameAILabs/link/security/advisories/new), not here.**
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+      placeholder: |
+        I sent a message to a Claude Code session from my phone. I expected Claude to start working on it. Instead it stayed "Queued" and never arrived.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: If you can make it happen again, how?
+      placeholder: |
+        1. Start a session with `sesame-link claude`
+        2. Open it at link.sesame.com on a phone
+        3. Send "hello"
+  - type: input
+    id: link-version
+    attributes:
+      label: Sesame Link version
+      description: Output of `sesame-link --version`.
+      placeholder: sesame-link 0.1.30
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Computer running Link
+      options:
+        - macOS, Apple Silicon
+        - macOS, Intel
+        - Linux x86-64
+    validations:
+      required: true
+  - type: input
+    id: os-version
+    attributes:
+      label: Operating system version
+      placeholder: macOS 26.1, Ubuntu 24.04
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Coding tool
+      options:
+        - Claude Code
+        - Codex
+        - Pi
+        - Not specific to one tool
+    validations:
+      required: true
+  - type: input
+    id: runtime-version
+    attributes:
+      label: Coding tool version
+      description: For example `claude --version` or `codex --version`. Link's behaviour depends on this version.
+      placeholder: 2.1.287 (Claude Code)
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where you saw it
+      multiple: true
+      options:
+        - Web app on a computer
+        - Web app on a phone
+        - Voice call in the Sesame app
+        - Menu-bar app
+        - Terminal or CLI
+        - Installer
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: Output of `sesame-link status`
+      description: Remove anything you consider private.
+      render: text
+  - type: markdown
+    attributes:
+      value: |
+        **Don't paste raw logs or session content.** They can contain code, file paths, and prompts. Copy only the lines that show the problem.

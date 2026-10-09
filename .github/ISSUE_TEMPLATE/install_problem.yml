@@ -1,0 +1,52 @@
+name: Install or update problem
+description: The installer, `sesame-link update`, or the first sign-in fails.
+labels: ["install", "needs-triage"]
+assignees: ["darkmirage"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The command you ran and what it printed. Remove anything private.
+      render: text
+    validations:
+      required: true
+  - type: dropdown
+    id: step
+    attributes:
+      label: Which step failed
+      options:
+        - Running install.sh
+        - sesame-link update, or updating from the web app
+        - sesame-link auth login
+        - Link doesn't start or stay running
+        - Menu-bar app
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Computer
+      options:
+        - macOS, Apple Silicon
+        - macOS, Intel
+        - Linux x86-64
+    validations:
+      required: true
+  - type: input
+    id: os-version
+    attributes:
+      label: Operating system version
+      placeholder: macOS 26.1, Ubuntu 24.04
+    validations:
+      required: true
+  - type: input
+    id: link-version
+    attributes:
+      label: Sesame Link version, if installed
+      description: Output of `sesame-link --version`.
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `sesame-link doctor`, if it runs
+      render: text

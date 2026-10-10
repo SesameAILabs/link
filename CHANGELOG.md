@@ -4,6 +4,55 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.31 — 2026-10-10
+
+- Messages from remote clients reach Claude Code sessions in more layouts: in don't-ask mode,
+  with a custom status line or pinned notices between Claude's message box and its mode footer,
+  and in narrow panes or under a long session title when Claude Code labels the line above its
+  message box with ultracode or fast mode. Sessions Sesame Link starts keep Claude Code's
+  screen-reader mode off, because its flat layout has no message box Sesame Link can recognize,
+  and `--ax-screen-reader` is no longer accepted as a Claude argument.
+- Messages from remote clients no longer sit unsent in a Claude Code session's message box after
+  a browser terminal opens on it. Sesame Link's input safeguard no longer leaves behind a tmux
+  error that opened tmux's view mode on the session and swallowed the Enter key, and Sesame Link
+  now closes view mode before pressing a key. While the session's terminal is in copy mode,
+  Sesame Link leaves the key unpressed instead of changing the selection.
+- A Codex turn that fails with an error Codex will not retry, such as a model stream lost while
+  the computer slept, no longer leaves the session refusing new remote messages until Link
+  reconnects or restarts. A Codex session that is refusing messages for another reason now shows
+  as degraded after its turn ends instead of appearing idle.
+- `sesame-link auth login` opens a sign-in link that fills in the terminal's code, so you check
+  that the browser shows the same code instead of typing it, and starts Sesame Link as soon as you
+  are signed in, in the folder you signed in from, instead of asking first; it also starts when
+  run outside a terminal. Sign-in and pairing codes are now bold rather than reversed, so
+  selecting one to copy it shows the selection.
+- Remote updates are on by default: browsers you link can update Sesame Link on this computer
+  without being asked first. Turn them off with `sesame-link config remote-update off`.
+- On macOS, `sesame-link restart` and `sesame-link start` no longer fail with "Bootstrap failed:
+  5: Input/output error" when the previous Sesame Link is still exiting; they wait for launchd to
+  finish removing it before registering the new one.
+- Sesame Link reports completed and failed turns so remote clients can show which sessions have
+  unread results, including when no web browser is connected.
+- `sesame-link --help` and the menu-bar app link to the new public issue tracker at
+  https://github.com/SesameAILabs/link/issues, where you can report problems and request features.
+- Staff preview, Cursor sessions:
+  - Messages from remote clients reach Cursor sessions with Run Everything or Auto-review on, and
+    after the session's branch has a pull request open. They used to wait in the queue and never
+    arrive, because the mode's label or the pull request number in Cursor's footer stopped Sesame
+    Link recognizing the message box.
+  - Remote clients can start Cursor sessions with Auto-review, in which Cursor's reviewer runs the
+    calls it judges safe and asks about the rest, or Run Everything, which runs every call without
+    asking. Run Everything is offered only after you add `"run_everything"` to
+    `allowed_cursor_approval_modes` in `remote-access.json`; the setting allows Cursor's own
+    prompts and Auto-review by default.
+  - Remote clients can answer a Cursor session's command prompts again after the agent has edited
+    files, when Cursor shows its review hint under the prompt; under Auto-review, the prompt is
+    shown as waiting for an answer in the terminal rather than as a running turn.
+  - A Cursor session lists the pull requests it opens with `gh pr create` or a GitHub integration,
+    and the ones whose branch it pushes, as Claude Code, Codex, and Pi sessions do.
+  - New Cursor sessions can name themselves with a descriptive title, keeping any name you chose;
+    Cursor's own tool approval policy still applies.
+
 ## v0.1.30 — 2026-10-08
 
 - Messages from remote clients reach Claude Code sessions again when Claude Code labels the line

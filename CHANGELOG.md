@@ -4,6 +4,43 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.33 — 2026-10-12
+
+**New**
+
+- You can fork a conversation into a new session, optionally on another model and in a new Git
+  worktree, leaving the original untouched.
+- Forks can start from an idle Claude Code or Pi session, a Codex session at any finished turn,
+  an ended session, or a conversation you had outside Sesame Link.
+- Forks need Claude Code 2.1.296, Pi 1.0.2, or Codex 0.154.0 or newer.
+
+**Improved**
+
+- `sesame-link restart` now also restarts Codex after you install a new Codex release, so
+  features that need it, such as Codex forks, turn on.
+- `sesame-link diagnostics` no longer overwrites an existing file; move it aside or pass another
+  `--output`.
+
+**Fixed**
+
+- Messages no longer stay unconfirmed or hold later messages after you submit them yourself in a
+  busy Claude Code session.
+- Messages reach Claude Code more reliably while Claude has queued messages or has just compacted
+  its context.
+- A fork's first message no longer stays listed as queued after it appears.
+- Workflow agents that were stopped, paused, or cut short are no longer listed as still working.
+- `sesame-link uninstall` right after `stop` no longer occasionally fails with "Couldn't keep
+  Sesame Link stopped".
+- Session folders and slash commands are handled more safely.
+
+**Staff preview**
+
+- Cursor sessions say to run `agent login` when the Cursor CLI is logged out, in
+  `sesame-link status`, the New session dialog, and at start.
+- Cursor Plan mode shows the "Ready to build?" prompt as waiting on the terminal, and later
+  messages are delivered after a plan you didn't build.
+- Only the terminal can trust a Cursor workspace; remote clients can't answer that prompt.
+
 ## v0.1.32 — 2026-10-11
 
 **Improved**

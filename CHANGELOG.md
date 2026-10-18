@@ -4,6 +4,22 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.34 — 2026-10-18
+
+**Improved**
+
+- When a Codex session can't take a message right now, it says nothing was sent and what helps:
+  waiting a minute, forking the session, or restarting Sesame Link.
+- On macOS, Login Items in System Settings can list Sesame Link by name with its icon, instead
+  of "Sesame AI, Inc.", when the menu-bar app is installed.
+
+**Fixed**
+
+- A Codex session no longer refuses every message until Sesame Link restarts after an earlier
+  message's outcome was unclear; it recovers once the thread shows what happened.
+- A fork of a compacted Claude Code conversation no longer holds every message after its first.
+  Start a new fork to replace one that is already stuck.
+
 ## v0.1.33 — 2026-10-12
 
 **New**

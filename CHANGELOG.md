@@ -4,6 +4,39 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.35 — 2026-10-20
+
+**New**
+
+- `sesame-link config orca on` makes each Claude Code terminal Orca starts a Sesame Link session,
+  while Orca keeps showing whether it's working, idle, or waiting.
+- `sesame-link claude "prompt"` sends the prompt once as the first message, and
+  `sesame-link claude --resume <id>` reconnects to that conversation's session or continues it.
+- A message stuck behind text left in Claude Code's input box can be released from your phone or
+  browser; the cleared text is shown so you can copy it back.
+
+**Improved**
+
+- Up to 12 sessions run at once by default, up from 8, and stopped sessions no longer count
+  toward the limit. A limit you set with `--max-sessions` is kept.
+- A session waiting on a screen Sesame Link doesn't recognize, such as an MCP server approval,
+  now shows that screen in your clients instead of sitting silently.
+- `sesame-link start` says when this computer keeps Sesame Link offline while nobody is logged
+  in, and on Linux offers to run `loginctl enable-linger`.
+- Claude Code 2.1.303 is verified.
+
+**Fixed**
+
+- Sesame Link no longer stays offline after Sesame refuses its connection; it keeps retrying,
+  and `sesame-link status` shows when.
+- Two copies of Sesame Link signed in as the same computer no longer knock each other offline all
+  day; `sesame-link status` says how to fix it.
+- Messages sent from your phone or browser around a `/compact`, or while you type in the session's
+  terminal, are now delivered or held for review correctly instead of getting stuck.
+- Idle sessions with a terminal attached no longer make the web client say "Link couldn't confirm
+  access to this session right now".
+- Approving a plan from your phone or browser no longer fails while Claude is still writing it.
+
 ## v0.1.34 — 2026-10-18
 
 **Improved**

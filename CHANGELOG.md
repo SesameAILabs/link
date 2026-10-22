@@ -4,6 +4,46 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.36 — 2026-10-22
+
+**New**
+
+- `sesame-link config orca on` now also makes each Codex terminal Orca opens a Sesame Link
+  session, and Orca keeps showing whether it's working, idle, or waiting.
+- Pi asks whether to trust a new folder in the web app, the Sesame app, or `sesame-link pi`, and
+  the session starts once you answer. Pi remembers your answer.
+
+**Improved**
+
+- You can answer Claude Code's "trust this folder?" prompt from your phone or browser even while a
+  terminal is attached, as long as nobody is typing in it.
+- With `sesame-link config claude-mod on`, interrupting from your phone or browser stops exactly
+  the running turn on Claude Team and Enterprise accounts.
+- Sesame Link's secure connections follow the latest certificate authority distrust decisions.
+
+**Fixed**
+
+- Claude Code sessions whose project folder under `~/.claude/projects` is a symbolic link no
+  longer show "Stop hook error" after each reply, and can be compacted again.
+- Claude Code 2.1.304 no longer shows a "hook was skipped" message in each session with
+  `claude-mod` on.
+- A Codex session's history stays readable after a turn is interrupted while one of its commands
+  keeps running.
+- Pi sessions start on Macs with account names longer than eight characters, instead of failing
+  with "Link state directory is too long for a Pi socket".
+
+**Staff preview**
+
+- Cursor's Auto-review command prompts, web search approvals, and "Delete this file?" prompts can
+  be answered from your phone or browser.
+- A Cursor session waiting on something only the terminal can answer shows what the terminal
+  shows, and a second message sent right after another is delivered in turn.
+- Cursor sessions keep taking messages after Cursor summarizes the conversation.
+- Cursor sessions on 2026.10.19 and earlier October builds no longer repeat their replies or end
+  turns with "WritableIterable is closed"; they show no thoughts. Restart sessions started before
+  the update.
+- The menu-bar app lists Cursor with the other coding agents.
+
 ## v0.1.35 — 2026-10-20
 
 **New**

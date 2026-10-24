@@ -4,6 +4,36 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.37 — 2026-10-24
+
+**Improved**
+
+- When Sesame Link stops with an error, its error report names the step it stopped in, so
+  repeated failures at start are easier to diagnose.
+- When Sesame Link can't read your login shell's `PATH` at startup, its error report says why,
+  such as a shell Link can't ask, like `nologin` or `tcsh`.
+
+**Fixed**
+
+- A Codex session no longer gets stuck after a turn fails with an error such as `Bad Request`: it
+  returns to idle and sends your next message.
+- A computer removed from your account while offline now stops trying to reconnect and reports
+  that it was removed, instead of retrying every hour.
+- `sesame-link start` and `sesame-link auth login` now refuse a `--state-directory` path that's
+  too long, and say why, instead of restarting and failing silently.
+- Stop is hidden in the web app whenever a Claude Code or Codex session can't be interrupted, such
+  as while a message is still being sent.
+
+**Staff preview**
+
+- Cursor shell-command and MCP tool approvals can be answered with "always allow" from your phone
+  or browser once you set `allow_cursor_persistent_rules` to true; it's off by default.
+- Cursor's file deletion, web search, and MCP tool approvals are no longer missed after the agent
+  edits a file, and MCP tool approvals can be answered remotely on Cursor 2026.10.22 or later.
+- Cursor sessions no longer hold later messages behind one whose delivery couldn't be confirmed
+  once a later message is delivered, and a message sent just as a background task finishes is no
+  longer left unconfirmed.
+
 ## v0.1.36 — 2026-10-22
 
 **New**

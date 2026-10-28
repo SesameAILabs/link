@@ -4,6 +4,44 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.38 — 2026-10-27
+
+**Improved**
+
+- Screenshots and other images a Claude Code session looks at, and images pasted into its
+  terminal, now appear in its conversation on your phone or browser.
+- **Report a problem** in the web app can now include a summary from each of your computers, so
+  you rarely need to run `sesame-link diagnostics`; it holds no conversation text or file names.
+- When Sesame Link can't start because its port is in use, `sesame-link start` and
+  `sesame-link status` now say so, name the port, and show how to find what holds it.
+
+**Fixed**
+
+- Codex conversations no longer fail to load, or refuse your messages, after a turn leaves a
+  background command or subagent running.
+- A message sent from your phone or browser after a settings command such as `/model` or `/login`
+  in a Claude Code session is no longer held for review.
+- Stopping or restarting Sesame Link no longer leaves a `terminated by signal 15` screen in a Codex
+  session's terminal until you press Escape.
+- A Claude Code session that starts with a command such as `/login` no longer shows as working
+  until you send its first prompt.
+- A message you send from the browser no longer briefly appears twice while it's being sent, and
+  matching messages from your other devices are no longer mistaken for yours.
+- After Sesame Link restarts, a Claude Code session still shows which messages came from your
+  phone or browser.
+- A Claude Code session you start with `sesame-link claude` or `sesame-link sessions create`, or
+  continue with `sesame-link claude --resume`, can take messages from your phone or browser right
+  away when its starting mode allows them.
+
+**Staff preview**
+
+- Cursor sessions on Cursor CLI 2026.10.22 no longer fail every turn with "Server error"; on that
+  version they show no thoughts.
+- Cursor sessions that fail to start now say why when the terminal stayed blank, including when
+  the tmux server has `CI` set, and name the command that fixes it.
+- Cursor command approvals whose "Add … to allowlist?" option wraps in a narrow terminal can now
+  be answered from your phone or browser.
+
 ## v0.1.37 — 2026-10-24
 
 **Improved**

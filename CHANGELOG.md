@@ -4,6 +4,43 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.39 — 2026-10-29
+
+**Action needed:** if you turned on `sesame-link config orca on` with an earlier release, run it
+again so Orca's Chat UI can start chats.
+
+**New**
+
+- `sesame-link sessions end <id-or-name>` ends a session and keeps its conversation: a Codex
+  conversation is archived instead of deleted, and `sessions delete` now does the same.
+- `sesame-link sessions --json` prints your sessions for scripts, including whether a terminal is
+  attached and when each was last used.
+- Each session now records when it was last used, kept across restarts, and `sesame-link sessions`
+  piped to another command shows it as a **Last used** column.
+
+**Improved**
+
+- Chats in Orca's Chat UI now start while `sesame-link config orca on` is set. They run plain
+  Claude Code or Codex; Orca terminals still start Sesame Link sessions.
+
+**Fixed**
+
+- A remote message to Claude Code that ends in a backslash is now sent instead of staying in
+  Claude's input box.
+- On a heavily loaded computer, a message sent from the web or a call no longer stops in Claude
+  Code's prompt box with "Something in Claude's terminal is in the way".
+- A session started without `--permission-mode` while your Claude Code settings default to Auto no
+  longer shows Auto when Claude Code started it in Manual. To message it remotely before its first
+  prompt at the terminal, start it with `--permission-mode`.
+- Forking a Claude Code conversation that Sesame Link doesn't manage now starts the fork in that
+  conversation's own permission mode.
+
+**Staff preview**
+
+- Cursor: a remote message waiting in a session is sent back for review as soon as a turn typed at
+  the terminal starts, not after it ends.
+- Cursor: answering a command prompt still works when Sesame Link restarts just after offering it.
+
 ## v0.1.38 — 2026-10-27
 
 **Improved**

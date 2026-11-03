@@ -48,6 +48,9 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Print Claude's output, including API errors, in the run log. Triage reads only public
+          # issues and this repository, so the log shows nothing that isn't already public.
+          show_full_output: true
           # Issues come from people without write access.
           allowed_non_write_users: "*"
           claude_args: >-

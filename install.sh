@@ -142,8 +142,10 @@ tmux_problem=""
 if [ -n "${tmux_sessions}" ]; then
     if command -v tmux >/dev/null 2>&1; then
         tmux_version="$(tmux -V 2>/dev/null || true)"
+        # tmux built from its main branch names the release it leads up to, as in "tmux next-3.9".
         tmux_version_status="$(printf '%s\n' "${tmux_version}" | awk '
-            $1 == "tmux" && $2 ~ /^[0-9]+\.[0-9]+/ {
+            $1 == "tmux" && $2 ~ /^(next-)?[0-9]+\.[0-9]+/ {
+                sub(/^next-/, "", $2)
                 split($2, parts, ".")
                 if (parts[1] + 0 > 3 || (parts[1] + 0 == 3 && parts[2] + 0 >= 4)) {
                     print "supported"

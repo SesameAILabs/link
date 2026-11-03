@@ -118,21 +118,28 @@ tmux_suggestion="$(tmux_install_suggestion)"
 claude_installed=0
 codex_installed=0
 pi_installed=0
+cursor_installed=0
 command -v claude >/dev/null 2>&1 && claude_installed=1
 command -v codex >/dev/null 2>&1 && codex_installed=1
 command -v pi >/dev/null 2>&1 && pi_installed=1
+command -v agent >/dev/null 2>&1 && cursor_installed=1
 [ "${claude_installed}" -eq 1 ] || [ "${codex_installed}" -eq 1 ] || [ "${pi_installed}" -eq 1 ] \
-    || fail "Sesame Link needs Claude Code, Codex, or Pi. Install Claude Code (claude), Codex (codex), or Pi (pi), then run this installer again."
+    || [ "${cursor_installed}" -eq 1 ] \
+    || fail "Sesame Link needs Claude Code, Codex, Pi, or Cursor. Install Claude Code (claude), Codex (codex), Pi (pi), or Cursor CLI (agent), then run this installer again."
 
-# Claude Code and Pi sessions run in tmux; Codex sessions do not.
-if [ "${claude_installed}" -eq 1 ]; then
-    tmux_sessions="Claude Code sessions"
-    [ "${pi_installed}" -eq 0 ] || tmux_sessions="Claude Code and Pi sessions"
-else
-    tmux_sessions="Pi sessions"
-fi
+# Claude Code, Pi, and Cursor sessions run in tmux; Codex sessions do not.
+case "${claude_installed}${pi_installed}${cursor_installed}" in
+    100) tmux_sessions="Claude Code sessions" ;;
+    010) tmux_sessions="Pi sessions" ;;
+    001) tmux_sessions="Cursor sessions" ;;
+    110) tmux_sessions="Claude Code and Pi sessions" ;;
+    101) tmux_sessions="Claude Code and Cursor sessions" ;;
+    011) tmux_sessions="Pi and Cursor sessions" ;;
+    111) tmux_sessions="Claude Code, Pi, and Cursor sessions" ;;
+    *) tmux_sessions="" ;;
+esac
 tmux_problem=""
-if [ "${claude_installed}" -eq 1 ] || [ "${pi_installed}" -eq 1 ]; then
+if [ -n "${tmux_sessions}" ]; then
     if command -v tmux >/dev/null 2>&1; then
         tmux_version="$(tmux -V 2>/dev/null || true)"
         tmux_version_status="$(printf '%s\n' "${tmux_version}" | awk '

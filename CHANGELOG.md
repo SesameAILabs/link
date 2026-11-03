@@ -4,6 +4,19 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.40 — 2026-11-02
+
+**New**
+
+- Cursor (Preview): the installer now accepts a computer with only Cursor CLI (`agent`) installed,
+  and checks for tmux 3.4 or newer, which Cursor sessions need.
+
+**Fixed**
+
+- The first remote message to a new Claude Code session is sent instead of staying queued.
+- When a session's permission mode isn't allowed remotely, the message now names the mode and says
+  the computer's owner can add it to `allowed_permission_modes` in `remote-access.json`.
+
 ## v0.1.39 — 2026-10-29
 
 **Action needed:** if you turned on `sesame-link config orca on` with an earlier release, run it

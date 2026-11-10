@@ -4,6 +4,33 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.41 — 2026-11-10
+
+**New**
+
+- Set `default_model` and `default_effort` in `remote-access.json` to choose the Claude model and
+  effort for sessions started from the web or a voice call; the web's new-session dialog
+  preselects them.
+
+**Improved**
+
+- When Codex refuses a message from a voice call, the voice agent can now say why.
+- The installer accepts tmux built from its main branch, which reports versions such as
+  `tmux next-3.9`.
+
+**Fixed**
+
+- Remote messages to a Claude Code session no longer stay queued after Claude Code compacts a long
+  conversation.
+- With Claude Code 2.1.321 and newer, a `/compact` sent from the web or a voice call no longer
+  leaves the session degraded and holds the messages sent after it.
+- Remote messages to a Claude Code session no longer wait forever after its login expires and you
+  run `/login`.
+- Remote messages to a Claude Code session on a busy computer are sent instead of sitting unsent in
+  Claude Code's input box.
+- A Claude Code session that's working when Sesame Link restarts now shows as running right away,
+  instead of degraded and holding messages until its turn ends.
+
 ## v0.1.40 — 2026-11-02
 
 **New**

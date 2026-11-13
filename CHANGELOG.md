@@ -4,6 +4,31 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.42 — 2026-11-13
+
+**New**
+
+- A computer running Sesame Link in Windows Subsystem for Linux now shows as Windows (WSL), with a
+  Windows mark, instead of as Linux.
+
+**Improved**
+
+- `sesame-link claude` says when Claude Code isn't installed or isn't on your `PATH`, as
+  `sesame-link codex` does for Codex.
+- `sesame-link config --help` says the `orca` setting covers both Claude Code and Codex.
+- Status reports Codex CLI 0.160.0 as verified.
+
+**Fixed**
+
+- Codex installed with npm under nvm, common on Ubuntu and WSL, is no longer reported as
+  "executable unavailable" while it runs in your terminal.
+- When Sesame Link starts at login, a signed-out Claude Code installed with npm is now detected, so
+  a remote start tells you how to sign in instead of failing inside the session.
+- Pi and Cursor (Preview): on a Mac, a session started when no tmux server was running no longer
+  makes macOS ask for folder access under Sesame Link's name.
+- Pi and Cursor (Preview): sessions no longer pick up the environment of a Claude Code session or
+  Orca terminal that Sesame Link was started from.
+
 ## v0.1.41 — 2026-11-10
 
 **New**

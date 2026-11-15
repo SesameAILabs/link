@@ -119,25 +119,52 @@ claude_installed=0
 codex_installed=0
 pi_installed=0
 cursor_installed=0
+hermes_installed=0
+opencode_installed=0
 command -v claude >/dev/null 2>&1 && claude_installed=1
 command -v codex >/dev/null 2>&1 && codex_installed=1
 command -v pi >/dev/null 2>&1 && pi_installed=1
 command -v agent >/dev/null 2>&1 && cursor_installed=1
+command -v hermes >/dev/null 2>&1 && hermes_installed=1
+command -v opencode >/dev/null 2>&1 && opencode_installed=1
 [ "${claude_installed}" -eq 1 ] || [ "${codex_installed}" -eq 1 ] || [ "${pi_installed}" -eq 1 ] \
-    || [ "${cursor_installed}" -eq 1 ] \
-    || fail "Sesame Link needs Claude Code, Codex, Pi, or Cursor. Install Claude Code (claude), Codex (codex), Pi (pi), or Cursor CLI (agent), then run this installer again."
+    || [ "${cursor_installed}" -eq 1 ] || [ "${hermes_installed}" -eq 1 ] \
+    || [ "${opencode_installed}" -eq 1 ] \
+    || fail "Sesame Link needs Claude Code, Codex, Pi, Cursor, Hermes, or OpenCode. Install Claude Code (claude), Codex (codex), Pi (pi), Cursor CLI (agent), Hermes Agent (hermes), or OpenCode (opencode), then run this installer again."
 
-# Claude Code, Pi, and Cursor sessions run in tmux; Codex sessions do not.
-case "${claude_installed}${pi_installed}${cursor_installed}" in
-    100) tmux_sessions="Claude Code sessions" ;;
-    010) tmux_sessions="Pi sessions" ;;
-    001) tmux_sessions="Cursor sessions" ;;
-    110) tmux_sessions="Claude Code and Pi sessions" ;;
-    101) tmux_sessions="Claude Code and Cursor sessions" ;;
-    011) tmux_sessions="Pi and Cursor sessions" ;;
-    111) tmux_sessions="Claude Code, Pi, and Cursor sessions" ;;
-    *) tmux_sessions="" ;;
-esac
+# Names its arguments as a list: "A", "A and B", or "A, B, and C".
+join_names() {
+    joined="" index=0
+    for name in "$@"; do
+        index=$((index + 1))
+        if [ "${index}" -eq 1 ]; then
+            joined="${name}"
+        elif [ "${index}" -lt "$#" ]; then
+            joined="${joined}, ${name}"
+        elif [ "$#" -eq 2 ]; then
+            joined="${joined} and ${name}"
+        else
+            joined="${joined}, and ${name}"
+        fi
+    done
+    printf '%s' "${joined}"
+}
+
+# The installed runtimes whose sessions need tmux. Claude Code, Pi, and Cursor sessions run in tmux,
+# and the terminal of an OpenCode session Link created opens in tmux. Codex and Hermes sessions do
+# not run in tmux.
+tmux_runtimes() {
+    set --
+    [ "${claude_installed}" -eq 1 ] && set -- "$@" "Claude Code"
+    [ "${pi_installed}" -eq 1 ] && set -- "$@" "Pi"
+    [ "${cursor_installed}" -eq 1 ] && set -- "$@" "Cursor"
+    [ "${opencode_installed}" -eq 1 ] && set -- "$@" "OpenCode"
+    join_names "$@"
+}
+
+tmux_runtime_names="$(tmux_runtimes)"
+tmux_sessions=""
+[ -n "${tmux_runtime_names}" ] && tmux_sessions="${tmux_runtime_names} sessions"
 tmux_problem=""
 if [ -n "${tmux_sessions}" ]; then
     if command -v tmux >/dev/null 2>&1; then
@@ -163,12 +190,18 @@ if [ -n "${tmux_sessions}" ]; then
     else
         tmux_problem="${tmux_sessions} need tmux 3.4 or newer, and tmux isn't installed."
     fi
-    # Codex sessions need no tmux, so with Codex present a missing or old tmux is a note. Whether
-    # Codex itself is ready is the binary's to check, so the note does not claim it.
+    # Codex and Hermes sessions need no tmux, so with either present a missing or old tmux is a
+    # note. Whether they are ready is the binary's to check, so the note does not claim it.
+    case "${codex_installed}${hermes_installed}" in
+        10) tmux_free="Codex was found" tmux_free_sessions="Codex sessions are" ;;
+        01) tmux_free="Hermes was found" tmux_free_sessions="Hermes sessions are" ;;
+        11) tmux_free="Codex and Hermes were found" tmux_free_sessions="Codex and Hermes sessions are" ;;
+        *) tmux_free="" tmux_free_sessions="" ;;
+    esac
     if [ -n "${tmux_problem}" ]; then
-        if [ "${codex_installed}" -eq 1 ]; then
+        if [ -n "${tmux_free}" ]; then
             echo "note: ${tmux_problem} ${tmux_suggestion}." >&2
-            echo "note: Codex was found. After installing, run 'sesame-link status' to check that Codex sessions are ready." >&2
+            echo "note: ${tmux_free}. After installing, run 'sesame-link status' to check that ${tmux_free_sessions} ready." >&2
         else
             fail "${tmux_problem} ${tmux_suggestion}, then run this installer again."
         fi

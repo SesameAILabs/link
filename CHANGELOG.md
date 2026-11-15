@@ -4,6 +4,79 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.43 — 2026-11-14
+
+**New**
+
+- Experimental: OpenCode 2.3.0 or later. Start OpenCode sessions from the web client or your Sesame
+  agent, choosing the model, effort, and agent; follow replies, tool calls, and subagents; send
+  messages, interrupt, and answer approvals and questions. Needs tmux 3.4 or newer, and may stop
+  working after an OpenCode update.
+- Experimental: Hermes Agent 0.23.1 or later. Start Hermes sessions from the web client or your
+  Sesame agent, follow replies and tool calls, send messages, interrupt, and answer approvals, while
+  `hermes --tui` shows the same session on your computer. May stop working after a Hermes update.
+- Remote clients can start OpenCode and Hermes sessions by default, including on computers paired
+  before. Turn that off per runtime with `sesame-link config opencode.remote-start off` or
+  `sesame-link config hermes.remote-start off`.
+- Remote sessions run under your own OpenCode permission rules and Hermes approval settings. With
+  OpenCode's defaults, commands and edits run without asking; "Always allow" and Hermes's
+  Run everything (YOLO) stay off for remote clients until you allow them on this computer.
+- Experimental: `sesame-link config opencode.sessions on` and `sesame-link config hermes.sessions on`
+  show the sessions you use in OpenCode or Hermes in Sesame Link, so you can follow, message, and
+  answer them from anywhere. Ending one in Sesame Link only hides it until you use it again.
+- `sesame-link config <runtime>.remote-start on|off` chooses which runtimes your phone and browser
+  may start sessions on, and applies without a restart. A browser can turn one off but never on.
+- Your first `sesame-link auth login` in a terminal asks which runtimes your phone and browser may
+  start; `sesame-link setup` asks again on a signed-in computer.
+- Sessions can watch their pull requests: Sesame Link asks the idle agent to fix failing checks,
+  resolve conflicts, and address review feedback, and tells it when a pull request merges.
+- Linked browsers can now change this computer's thinking, pull request lookup, and Claude mod
+  input settings, and turn off remote updates and error reporting. Turning those back on still
+  happens on the computer.
+- The web client's computer card shows that computer's Sesame Link settings and the command that
+  changes each one.
+- `sesame-link doctor --service <URL> --web-app <URL>` points a computer at a self-hosted Sesame
+  Link service over HTTPS, after you type `confirm`.
+
+**Improved**
+
+- `sesame-link status` lists OpenCode and Hermes with their versions, or what to do when one is
+  too old or can't be used.
+- `sesame-link status` warns when Hermes runs commands in a Docker sandbox that can't see your
+  files, and says how to change it.
+- The installer accepts a computer whose only coding agent is Hermes (tmux optional) or OpenCode
+  (with tmux 3.4 or newer).
+- Settings that belong to one runtime are now named `<runtime>.<setting>`, such as
+  `claude-code.mod`, `orca.chats`, and `hermes.sessions`; the earlier names still work.
+- Restarting or updating Sesame Link keeps Claude Code background agents and commands showing as
+  working.
+- On WSL, starting Sesame Link from a Windows folder now uses your Linux home folder as the default
+  workspace.
+- `sesame-link setup` no longer suggests `sesame-link start` while Sesame Link is running, and
+  reports the runtime checklist before asking about `/open-sesame`.
+
+**Fixed**
+
+- A Claude Code background agent that pauses to wait on its own command no longer disappears from
+  the session's status.
+- A Cursor workspace-trust prompt answered on the computer is no longer reported as answered
+  remotely.
+- Ending or stopping a Hermes or OpenCode session no longer fails on a computer without tmux.
+
+**Staff preview**
+
+- Antigravity CLI 1.5.8 or later: `sesame-link agy` starts a session in the current folder, and the
+  web client and Sesame app can start, follow, message, and interrupt Antigravity sessions.
+- Antigravity: answer command, file-edit, and new-file prompts and the model's questions from
+  Sesame Link, including for long file paths. Prompts in Auto mode, MCP tools, and files outside
+  the workspace are answered at the terminal.
+- Antigravity: a prompt Sesame Link can't read shows the session as waiting at the terminal, and a
+  turn stuck on "Loading..." for a minute is reported so you can stop it.
+- Antigravity: `sesame-link status` lists the CLI, and sent messages stop showing as queued once
+  the CLI records them.
+- Orca: long chats load again in remote clients instead of failing with "Orca sent a frame over
+  its size bound", and a linked browser can turn Orca chats off.
+
 ## v0.1.42 — 2026-11-13
 
 **New**

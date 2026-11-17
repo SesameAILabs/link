@@ -4,6 +4,39 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.44 — 2026-11-17
+
+**Improved**
+
+- `sesame-link start` and `sesame-link restart` list each runtime they checked and why any can't
+  be used.
+- Pull request watch tells a session about failing checks, conflicts, and review feedback even
+  while a dev server or subagent is still running in the background.
+- `sesame-link status` is shorter: each agent's row names the problem in a few words with the
+  command that fixes it, and `status --verbose` still has the full explanations.
+- `config`, `auth`, `unpair`, `uninstall`, `diagnostics`, and `connect` lead with a clear outcome
+  and aligned fields instead of paragraphs.
+
+**Fixed**
+
+- A runtime such as Pi, Cursor, or OpenCode that was too slow to answer while your computer was
+  busy at login no longer stays unavailable until the next restart; it is checked again.
+- Claude Code 2.1.326: remote clients get the workspace trust prompt again in projects that
+  pre-approve many tools, instead of the session showing as blocked at the terminal.
+- Hermes: one session Sesame Link can't read no longer makes every Hermes session look
+  unreachable, and long mirrored sessions no longer repeat old turns when a new one ends.
+- Hermes: a session recovers after Sesame Link stops while sending a message, and some follow-up
+  messages are no longer wrongly refused.
+- Hermes: a finished turn with no reply Sesame Link can read is logged with the reason instead of
+  ending silently.
+
+**Staff preview**
+
+- Antigravity: sent messages are confirmed and tied to their replies, so the "Delivery unconfirmed"
+  warning is gone, and the session shows the mode its terminal is in as soon as it changes.
+- Antigravity: questions the model asks without saying whether several answers are allowed can be
+  answered from Sesame Link, and each feature is offered only on CLI releases that support it.
+
 ## v0.1.43 — 2026-11-14
 
 **New**

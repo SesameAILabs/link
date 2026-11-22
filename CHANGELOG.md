@@ -4,6 +4,32 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.45 — 2026-11-21
+
+**Improved**
+
+- A pull request a session opens with `gh pr create` is listed on the session even when the
+  command's output didn't include its link.
+- The Codex terminal Sesame Link opens keeps Codex's earlier output, so you can scroll back
+  through the session.
+
+**Fixed**
+
+- Claude Code 2.1.328 and later: interrupting a long remote message before Claude answers now
+  withdraws it, instead of leaving the session stuck until it was cleared at the terminal.
+- A daemon that keeps hitting the same error no longer sends a flood of error reports.
+
+**Staff preview**
+
+- Antigravity: command approvals, including those from subagents, can be answered remotely on CLI
+  1.5.10 and later.
+- Antigravity: messages sent while a turn runs join that turn on CLI 1.5.10 and later, and
+  messages keep arriving while background tasks or subagents run.
+- Antigravity: sessions name themselves after their first turn on CLI 1.5.10 and later.
+- Antigravity: `sesame-link status` warns when the CLI is signed in with a personal Google
+  account, since Google may restrict consumer accounts driven by other applications.
+- Antigravity: dictated messages that start or end with a space are confirmed delivered.
+
 ## v0.1.44 — 2026-11-17
 
 **Improved**

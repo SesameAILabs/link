@@ -4,6 +4,14 @@ What each Sesame Link release changes. The same notes are on the
 [documentation's Changelog page](https://link.sesame.com/docs/changelog/) and attached to each
 [GitHub release](https://github.com/SesameAILabs/link/releases).
 
+## v0.1.46 — 2026-11-23
+
+**Fixed**
+
+- Codex sessions start again; in `v0.1.45` they failed to launch and retried every 30 seconds.
+- When Codex fails to start or is stopped forcibly, Sesame Link no longer prints a
+  `… returned N` line over the tmux pane you have open.
+
 ## v0.1.45 — 2026-11-21
 
 **Improved**
